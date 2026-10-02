@@ -214,6 +214,36 @@ The person responsible refuses to provide further information.
 
 
 <script>
+const TRACKING_URL = "https://script.google.com/macros/s/AKfycbzG0I565RHn3JOeZciO1dnIFhtfjaFRZCywddh3XKKq7wQ_sYjQPKpMC4F11sqqOQlf/exec";
+const SESSION_KEY = "sunday_tracking_session";
+
+function getSessionId() {
+  let session = localStorage.getItem(SESSION_KEY);
+  if (!session) {
+    session = "SUN-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8);
+    localStorage.setItem(SESSION_KEY, session);
+  }
+  return session;
+}
+
+function track(eventName) {
+  try {
+    fetch(TRACKING_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=UTF-8" },
+      body: JSON.stringify({
+        event: eventName,
+        session: getSessionId(),
+        device: navigator.userAgent
+      }),
+      keepalive: true
+    }).catch(() => {});
+  } catch (e) {}
+}
+
+track("PAGE_OPENED");
+
 
 function footer() {
 return `
@@ -231,6 +261,7 @@ document.getElementById("app").innerHTML =
 
 
 function runMission() {
+track("HELL_YEAH_SELECTED");
 
 show(`
 <pre>
@@ -279,6 +310,7 @@ you are going to ask questions.
 
 
 function questions() {
+track("DEMAND_ANSWERS_SELECTED");
 
 show(`
 <pre>
@@ -322,6 +354,7 @@ CURIOSITY:
 
 
 function distrust() {
+track("DONT_TRUST_SELECTED");
 
 show(`
 <pre>
@@ -352,6 +385,7 @@ getting the itinerary.
 
 
 function engineer() {
+track("ENGINEER_MODE_SELECTED");
 
 show(`
 <pre>
@@ -399,6 +433,7 @@ but you do not have root access to Sunday.
 }
 
 function clues() {
+track("ACCEPT_DEFEAT_SELECTED");
 
 show(`
 <pre>
@@ -452,6 +487,7 @@ Not before.
 
 
 function finalReveal() {
+track("CLEARANCE_REQUESTED");
 
 show(`
 <pre>
@@ -510,6 +546,7 @@ Bring yourself.
 
 
 function finish() {
+track("TRANSMISSION_CLOSED");
 
 show(`
 <pre>
@@ -546,6 +583,8 @@ End of transmission.
 </p>
 `);
 }
+
+  track("MISSION_COMPLETED");
 
 </script>
 
