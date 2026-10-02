@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<title>SUNDAY.EXE</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#050505;color:#eee;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;padding:14px}
+.box{max-width:560px;margin:auto;min-height:calc(100vh - 28px);border:1px solid #292929;background:#090909;padding:22px;display:flex;flex-direction:column;box-shadow:0 20px 70px #000}
+pre{color:#8cff9b;font-size:11px;white-space:pre-wrap;line-height:1.55}
+h1{letter-spacing:4px;margin:25px 0 4px;font-size:30px}
+h2{font-size:12px;color:#777;font-weight:400;margin:0 0 20px}
+p{line-height:1.7;color:#bbb;font-size:13px}
+.card{border:1px solid #292929;padding:14px;margin:16px 0;font-size:11px;line-height:2}
+.ok{color:#8cff9b}.warn{color:#ffd166}
+.buttons{display:grid;gap:10px;margin-top:auto;padding-top:20px}
+button{padding:14px;background:#090909;color:#eee;border:1px solid #444;font:inherit;text-align:left;cursor:pointer}
+button:hover{border-color:#8cff9b;background:#101510}
+.fade{animation:f .3s ease}@keyframes f{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.footer{margin-top:20px;padding-top:10px;border-top:1px solid #222;color:#444;font-size:9px;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<main class="box" id="app"></main>
+
+<script>
+const app=document.querySelector("#app");
+const session=(crypto.randomUUID?crypto.randomUUID():String(Date.now()));
+
+function track(event){
+  try{
+    const item={event,session,time:new Date().toISOString()};
+    localStorage.setItem("sunday_last_event",JSON.stringify(item));
+  }catch(e){}
+}
+
+function render(html,event){
+  app.innerHTML='<div class="fade">'+html+'</div><div class="footer"><span>SUNDAY.EXE</span><span>BUILD 04.10.26</span></div>';
+  if(event) track(event);
+}
+function buttons(x){return '<div class="buttons">'+x+'</div>'}
+
+function boot(){
+render(`
+<pre>> launching SUNDAY.exe
+> user found ✓
+> Sunday available ✓
+> checking reason...
+> ████████████████ 100%</pre>
+
+<h1>SUNDAY.EXE</h1>
+<h2>an unnecessarily complicated invitation</h2>
+
+<div class="card">
+DATE: <span class="ok">04.10.2026</span><br>
+START: <span class="ok">09:00</span><br>
+LOCATION: <span class="ok">BENGALURU</span><br>
+DURATION: <span class="warn">CLASSIFIED</span>
+</div>
+
+<p>You've been selected for a Sunday that apparently required its own software.</p>
+
+${buttons(`
+<button onclick="start()">[ RUN SUNDAY.EXE ]</button>
+<button onclick="why()">[ WHY DOES THIS EXIST? ]</button>
+<button onclick="suspicious()">[ THIS LOOKS SUSPICIOUS ]</button>
+`)}
+`,"PAGE_OPENED");
+}
+
+function start(){
+render(`
+<pre>> sudo sunday --start
+> permission check...
+> permission granted ✓</pre>
+<h1>ACCESS GRANTED</h1>
+<p>Congratulations. You have made your first questionable decision.</p>
+
+<div class="card">
+YOUR ONLY JOB: <span class="ok">SHOW UP</span><br>
+DRESS: COMFORTABLE<br>
+PHONE: <span class="ok">REQUIRED</span><br>
+QUESTIONS: <span class="warn">MOSTLY USELESS</span>
+</div>
+
+<p>Do not attempt to obtain the itinerary.</p>
+
+${buttons(`
+<button onclick="rules()">[ I ACCEPT THE TERMS ]</button>
+<button onclick="suspicious()">[ I HAVE QUESTIONS ]</button>
+`)}
+`,"START_CLICKED");
+}
+
+function why(){
+render(`
+<pre>> query: WHY_DOES_THIS_EXIST?
+> searching...
+> answer found.</pre>
+<h1>REASON UNKNOWN</h1>
+<p>Actually, there is a reason.</p>
+<p>But you're going to have to wait for it.</p>
+<div class="card"><span class="ok">SYSTEM NOTE:</span><br><br>Curiosity is not a valid debugging strategy.</div>
+${buttons(`<button onclick="start()">[ FINE. I'M CURIOUS ]</button>`)}
+`,"WHY_CLICKED");
+}
+
+function suspicious(){
+render(`
+<pre>> suspicion detected...
+> running risk assessment...
+> result: suspiciously wholesome.</pre>
+<h1>FAIR.</h1>
+<p>You are allowed to be suspicious.</p>
+<p>You are <b>not</b> allowed to know what happens next.</p>
+${buttons(`<button onclick="start()">[ OKAY, I'M IN ]</button>`)}
+`,"SUSPICIOUS_CLICKED");
+}
+
+function rules(){
+render(`
+<pre>> loading hidden_configuration...</pre>
+<h1>RULES</h1>
+<div class="card">
+01 — Keep the whole day free.<br>
+02 — Do not plan anything else.<br>
+03 — Bring yourself.<br>
+04 — Do not interrogate the organiser.<br>
+05 — Enjoy the day.
+</div>
+<p class="ok">If you ask “what are you planning?” → CLASSIFIED. NICE TRY.</p>
+${buttons(`<button onclick="clues()">[ CONTINUE ]</button>`)}
+`,"RULES_OPENED");
+}
+
+function clues(){
+render(`
+<pre>> decrypting clue_packet...
+> access level: unnecessarily high</pre>
+<h1>CLUE PACKET</h1>
+<div class="card">
+FOOD — <span class="ok">YES</span><br>
+SOMETHING HANDMADE — <span class="ok">YES</span><br>
+SOMETHING TO KEEP — <span class="ok">YES</span><br>
+SOMETHING TO WEAR — <span class="ok">YES</span><br>
+SOMETHING UNEXPECTED — <span class="warn">PROBABLY</span>
+</div>
+<p>One entry is classified as misinformation.</p>
+${buttons(`<button onclick="debuggerPage()">[ RUN DEBUGGER ]</button>`)}
+`,"CLUES_OPENED");
+}
+
+function debuggerPage(){
+render(`
+<pre>> debugger --deep-scan
+> scanning itinerary...
+> scanning organiser...
+> scanning surprise inventory...
+> ████████████████ 100%</pre>
+<h1>DEBUG RESULT</h1>
+<div class="card">
+<span class="warn">ERROR 403</span><br><br>
+You are not authorised to view the source code of Sunday.<br><br>
+<span class="ok">Nice try, engineer.</span>
+</div>
+${buttons(`
+<button onclick="sudo()">[ TRY SUDO ]</button>
+<button onclick="finalPage()">[ ACCEPT MISSION ]</button>
+`)}
+`,"DEBUGGER_USED");
+}
+
+function sudo(){
+render(`
+<pre>> sudo sunday --reveal
+> authentication...
+> DENIED.</pre>
+<h1>NOPE.</h1>
+<p>Privilege escalation attempt detected.</p>
+<div class="card"><span class="ok">Administrator message:</span><br><br>Just show up. Everything else will make sense later.</div>
+${buttons(`<button onclick="finalPage()">[ ACCEPT MY FATE ]</button>`)}
+`,"SUDO_ATTEMPT");
+}
+
+function finalPage(){
+render(`
+<pre>> deployment complete ✓
+> Sunday.exe is now scheduled.</pre>
+<h1>MISSION ACCEPTED</h1>
+<div class="card">
+04.10.26 // <span class="ok">09:00 AM</span><br>
+STATUS: <span class="ok">READY</span>
+</div>
+<p>Be ready.<br>Wear something comfortable.<br>Bring your phone.<br>Bring yourself.</p>
+<p class="ok"><b>No itinerary. No spoilers.</b></p>
+<p>Everything else will be revealed when it needs to be.</p>
+${buttons(`<button onclick="finish()">[ CLOSE SUNDAY.EXE ]</button>`)}
+`,"MISSION_ACCEPTED");
+}
+
+function finish(){
+render(`
+<pre>> closing application...
+> saving memories...
+> done ✓</pre>
+<h1>SEE YOU SUNDAY.</h1>
+<p class="ok">Your Sunday has officially been compromised.</p>
+<div class="card">SESSION: <span class="ok">ACTIVE</span><br>TIME: 09:00<br>DATE: 04.10.26</div>
+`,"SESSION_CLOSED");
+}
+
+boot();
+</script>
+</body>
+</html>
