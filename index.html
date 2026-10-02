@@ -1,190 +1,153 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#07070a">
 <title>SUNDAY // CLASSIFIED</title>
 
 <style>
-*{box-sizing:border-box}
-
-body{
-margin:0;
-background:#07070a;
-color:#f4f4f5;
-font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-padding:14px;
+* {
+  box-sizing: border-box;
 }
 
-.wrap{
-max-width:560px;
-min-height:calc(100vh - 28px);
-margin:auto;
-border:1px solid #303039;
-background:radial-gradient(circle at 50% 0,#15151d 0,#09090c 42%,#060609 100%);
-padding:22px;
-display:flex;
-flex-direction:column;
-overflow:hidden;
+body {
+  margin: 0;
+  padding: 14px;
+  min-height: 100vh;
+  background: #07070a;
+  color: #f4f4f5;
+  font-family: monospace;
 }
 
-.top{
-font-size:10px;
-color:#777;
-display:flex;
-justify-content:space-between;
-border-bottom:1px solid #24242c;
-padding-bottom:10px;
+.wrap {
+  max-width: 560px;
+  min-height: calc(100vh - 28px);
+  margin: auto;
+  padding: 22px;
+  border: 1px solid #303039;
+  background: radial-gradient(circle at top, #171720, #07070a 65%);
+  display: flex;
+  flex-direction: column;
 }
 
-pre{
-color:#9cffb0;
-font-size:11px;
-line-height:1.55;
-white-space:pre-wrap;
+.top {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #292930;
+  color: #777;
+  font-size: 10px;
 }
 
-h1{
-font-size:31px;
-letter-spacing:5px;
-margin:25px 0 4px;
+pre {
+  white-space: pre-wrap;
+  line-height: 1.6;
+  color: #9cffb0;
+  font-size: 11px;
 }
 
-h2{
-font-size:11px;
-color:#777;
-font-weight:400;
-letter-spacing:1px;
+h1 {
+  margin-top: 28px;
+  margin-bottom: 5px;
+  font-size: 32px;
+  letter-spacing: 5px;
 }
 
-p{
-font-size:13px;
-line-height:1.75;
-color:#c2c2c8;
+h2 {
+  color: #777;
+  font-size: 11px;
+  font-weight: normal;
+  letter-spacing: 1px;
 }
 
-.card{
-border:1px solid #303039;
-background:#0b0b10;
-padding:15px;
-margin:17px 0;
-font-size:11px;
-line-height:2;
+p {
+  color: #c4c4ca;
+  font-size: 13px;
+  line-height: 1.7;
 }
 
-.green{color:#9cffb0}
-.yellow{color:#ffd66b}
-.red{color:#ff8d8d}
-
-.buttons{
-display:grid;
-gap:10px;
-margin-top:auto;
-padding-top:22px;
+.big {
+  color: #eee;
+  font-size: 15px;
+  line-height: 1.8;
 }
 
-button{
-padding:15px;
-background:#0a0a0f;
-color:#f4f4f5;
-border:1px solid #4a4a55;
-font:inherit;
-text-align:left;
-cursor:pointer;
+.card {
+  margin: 18px 0;
+  padding: 15px;
+  border: 1px solid #303039;
+  background: #0c0c11;
+  font-size: 11px;
+  line-height: 2;
 }
 
-button:active{
-transform:scale(.99);
-border-color:#9cffb0;
+.green {
+  color: #9cffb0;
 }
 
-.fade{
-animation:fade .28s ease;
+.yellow {
+  color: #ffd66b;
 }
 
-@keyframes fade{
-from{
-opacity:0;
-transform:translateY(8px)
-}
-to{
-opacity:1;
-transform:none
-}
+.red {
+  color: #ff8d8d;
 }
 
-.footer{
-margin-top:18px;
-padding-top:10px;
-border-top:1px solid #22222a;
-color:#4d4d56;
-font-size:9px;
-display:flex;
-justify-content:space-between;
+.buttons {
+  display: grid;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 20px;
 }
 
-.big{
-font-size:15px;
-color:#eee;
-line-height:1.8;
+button {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #4a4a55;
+  background: #0b0b10;
+  color: #f4f4f5;
+  font-family: monospace;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+button:active {
+  border-color: #9cffb0;
+  transform: scale(.99);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding-top: 10px;
+  border-top: 1px solid #22222a;
+  color: #555;
+  font-size: 9px;
+}
+
+.fade {
+  animation: fade .25s ease;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<main class="wrap" id="app"></main>
-
-<script>
-
-const app=document.getElementById("app");
-
-const events=[];
-
-function track(e){
-
-const item={
-event:e,
-time:new Date().toISOString()
-};
-
-events.push(item);
-
-try{
-localStorage.setItem(
-"sunday_events",
-JSON.stringify(events)
-);
-}catch(_){}
-
-}
-
-function render(body,event){
-
-if(event){
-track(event);
-}
-
-app.innerHTML=
-'<div class="fade">'+body+
-'</div>'+
-'<div class="footer">'+
-'<span>SUNDAY // CLASSIFIED</span>'+
-'<span>BUILD 04.10.26</span>'+
-'</div>';
-
-}
-
-const B=x=>
-'<div class="buttons">'+x+'</div>';
-
-
-/* START */
-
-function boot(){
-
-render(`
+<main class="wrap" id="app">
 
 <div class="top">
 <span>INCOMING // PRIVATE</span>
@@ -192,45 +155,30 @@ render(`
 </div>
 
 <pre>
-> detecting recipient...
-> recipient found ✓
-> curiosity level: HIGH
-> engineer detected ✓
-> anti-debug protocol: ENABLED
-> ████████████████ 100%
+&gt; detecting recipient...
+&gt; recipient found ✓
+&gt; curiosity level: HIGH
+&gt; engineer detected ✓
+&gt; anti-debug protocol: ENABLED
+&gt; ████████████████ 100%
 </pre>
 
 <h1>SUNDAY</h1>
 
-<h2>
-THIS IS NOT A NORMAL INVITATION.
-</h2>
+<h2>THIS IS NOT A NORMAL INVITATION.</h2>
 
 <div class="card">
-
 STATUS ........
-<span class="green">
-SOMETHING IS HAPPENING
-</span>
+<span class="green">SOMETHING IS HAPPENING</span>
 <br>
-
 ITINERARY .....
-<span class="yellow">
-CLASSIFIED
-</span>
+<span class="yellow">CLASSIFIED</span>
 <br>
-
 CLEARANCE .....
-<span class="red">
-INSUFFICIENT
-</span>
+<span class="red">INSUFFICIENT</span>
 <br>
-
 ESCAPE ROUTE ..
-<span class="red">
-NOT FOUND
-</span>
-
+<span class="red">NOT FOUND</span>
 </div>
 
 <p class="big">
@@ -238,13 +186,12 @@ Your Sunday has been suspiciously pre-booked.
 </p>
 
 <p>
-The person responsible refuses to provide
-further information.
+The person responsible refuses to provide further information.
 </p>
 
-${B(`
+<div class="buttons">
 
-<button onclick="run()">
+<button onclick="runMission()">
 [ HELL YEAH — LET'S GO ]
 </button>
 
@@ -256,30 +203,45 @@ ${B(`
 [ I DON'T TRUST YOU ]
 </button>
 
-`)}
+</div>
 
-`,"PAGE_OPENED");
+<div class="footer">
+<span>SUNDAY // CLASSIFIED</span>
+<span>BUILD 04.10.26</span>
+</div>
 
+</main>
+
+
+<script>
+
+function footer() {
+return `
+<div class="footer">
+<span>SUNDAY // CLASSIFIED</span>
+<span>BUILD 04.10.26</span>
+</div>`;
 }
 
 
-/* RUN */
+function show(content) {
+document.getElementById("app").innerHTML =
+'<div class="fade">' + content + '</div>' + footer();
+}
 
-function run(){
 
-render(`
+function runMission() {
 
+show(`
 <pre>
-> running sunday_protocol...
-> checking availability...
-> Sunday: RESERVED ✓
-> cancelling: DISABLED ✓
-> curiosity: UNHELPFUL ✓
+&gt; running sunday_protocol...
+&gt; checking availability...
+&gt; Sunday: RESERVED ✓
+&gt; cancellation: DISABLED ✓
+&gt; curiosity: UNHELPFUL ✓
 </pre>
 
-<h1>
-ACCESS GRANTED
-</h1>
+<h1>ACCESS GRANTED</h1>
 
 <p class="big">
 Excellent.
@@ -291,177 +253,135 @@ but correct decision.
 
 RULE_01 — KEEP THE DAY FREE
 <br>
-
 RULE_02 — WEAR SOMETHING COMFORTABLE
 <br>
-
 RULE_03 — BRING YOUR PHONE
 <br>
-
 RULE_04 — BRING YOURSELF
 <br>
-
 RULE_05 — DO NOT ASK FOR THE ITINERARY
 
 </div>
 
 <p class="green">
 One more thing:
-the organiser knows you are going to ask questions.
+the organiser already knows
+you are going to ask questions.
 </p>
 
-${B(`
-
+<div class="buttons">
 <button onclick="engineer()">
 [ RUN ENGINEER MODE ]
 </button>
-
-`)}
-
-`,"RUN_CLICKED");
-
+</div>
+`);
 }
 
 
-/* QUESTIONS */
+function questions() {
 
-function questions(){
-
-render(`
-
+show(`
 <pre>
-> query received: "WHAT ARE WE DOING?"
-> searching answer...
-> answer not found.
-> suspiciously convenient.
+&gt; query received:
+&gt; "WHAT ARE WE DOING?"
+&gt; searching answer...
+&gt; answer not found.
+&gt; suspiciously convenient.
 </pre>
 
-<h1>
-ACCESS DENIED.
-</h1>
+<h1>ACCESS DENIED.</h1>
 
-<p>
+<p class="big">
 Nice attempt.
 </p>
 
 <div class="card">
 
 QUESTION PRIVILEGE:
-<span class="red">
-REVOKED
-</span>
+<span class="red">REVOKED</span>
 
 <br>
 
 SPOILER ACCESS:
-<span class="red">
-0%
-</span>
+<span class="red">0%</span>
 
 <br>
 
 CURIOSITY:
-<span class="yellow">
-∞
-</span>
+<span class="yellow">∞</span>
 
 </div>
 
-${B(`
-
-<button onclick="run()">
+<div class="buttons">
+<button onclick="runMission()">
 [ FINE. I'M CURIOUS ]
 </button>
-
-`)}
-
-`,"QUESTIONS_CLICKED");
-
+</div>
+`);
 }
 
 
-/* SUSPICIOUS */
+function distrust() {
 
-function distrust(){
-
-render(`
-
+show(`
 <pre>
-> trust assessment...
-> suspicion detected ✓
-> threat level...
-> surprisingly wholesome.
+&gt; trust assessment...
+&gt; suspicion detected ✓
+&gt; threat level...
+&gt; surprisingly wholesome.
 </pre>
 
-<h1>
-FAIR.
-</h1>
+<h1>FAIR.</h1>
 
-<p>
+<p class="big">
 You are absolutely allowed to be suspicious.
 </p>
 
 <p>
-You are absolutely
-<b>not</b>
+You are absolutely <b>not</b>
 getting the itinerary.
 </p>
 
-${B(`
-
-<button onclick="run()">
+<div class="buttons">
+<button onclick="runMission()">
 [ OKAY, I'M IN ]
 </button>
-
-`)}
-
-`,"DISTRUST_CLICKED");
-
+</div>
+`);
 }
 
 
-/* ENGINEER MODE */
+function engineer() {
 
-function engineer(){
-
-render(`
-
+show(`
 <pre>
-> engineer_mode initiated...
-> attempting root access...
-> sudo sunday --reveal
-> ACCESS DENIED.
-> nice try.
+&gt; engineer_mode initiated...
+&gt; attempting root access...
+&gt; sudo sunday --reveal
+&gt; ACCESS DENIED.
+&gt; nice try.
 </pre>
 
-<h1>
-ROOT ACCESS?
-</h1>
+<h1>ROOT ACCESS?</h1>
 
-<p>
+<p class="big">
 Seriously?
 </p>
 
 <div class="card">
 
 DEBUGGER ........
-<span class="green">
-BLOCKED
-</span>
+<span class="green">BLOCKED</span>
 
 <br>
 
 SOURCE CODE ......
-<span class="green">
-CLASSIFIED
-</span>
+<span class="green">CLASSIFIED</span>
 
 <br>
 
 ORGANISER ........
-<span class="yellow">
-UNCOOPERATIVE
-</span>
+<span class="yellow">UNCOOPERATIVE</span>
 
 </div>
 
@@ -470,33 +390,24 @@ You may be an engineer,
 but you do not have root access to Sunday.
 </p>
 
-${B(`
-
+<div class="buttons">
 <button onclick="clues()">
 [ ACCEPT DEFEAT ]
 </button>
-
-`)}
-
-`,"ENGINEER_MODE");
-
+</div>
+`);
 }
 
 
-/* CLUES */
+function clues() {
 
-function clues(){
-
-render(`
-
+show(`
 <pre>
-> downloading intelligence packet...
-> packet decrypted ✓
+&gt; downloading intelligence packet...
+&gt; packet decrypted ✓
 </pre>
 
-<h1>
-CLUE DROP
-</h1>
+<h1>CLUE DROP</h1>
 
 <p>
 Here is what the system is willing to admit:
@@ -505,37 +416,27 @@ Here is what the system is willing to admit:
 <div class="card">
 
 FOOD .................
-<span class="green">
-YES
-</span>
+<span class="green">YES</span>
 
 <br>
 
 SOMETHING HANDMADE ..
-<span class="green">
-YES
-</span>
+<span class="green">YES</span>
 
 <br>
 
 SOMETHING TO KEEP ....
-<span class="green">
-YES
-</span>
+<span class="green">YES</span>
 
 <br>
 
 SOMETHING TO WEAR ....
-<span class="green">
-YES
-</span>
+<span class="green">YES</span>
 
 <br>
 
 SOMETHING UNEXPECTED .
-<span class="yellow">
-PROBABLY
-</span>
+<span class="yellow">PROBABLY</span>
 
 </div>
 
@@ -543,64 +444,47 @@ PROBABLY
 One clue is deliberately misleading.
 </p>
 
-${B(`
-
-<button onclick="finalCheck()">
+<div class="buttons">
+<button onclick="finalReveal()">
 [ I WANT THE FINAL CLEARANCE ]
 </button>
-
-`)}
-
-`,"CLUES_OPENED");
-
+</div>
+`);
 }
 
 
-/* FINAL */
+function finalReveal() {
 
-function finalCheck(){
-
-render(`
-
+show(`
 <pre>
-> final clearance requested...
-> checking user compliance...
-> result: acceptable.
-> unlocking classified schedule...
-> ████████████████ 100%
+&gt; final clearance requested...
+&gt; checking user compliance...
+&gt; result: acceptable.
+&gt; unlocking classified schedule...
+&gt; ████████████████ 100%
 </pre>
 
-<h1>
-MISSION ACCEPTED
-</h1>
+<h1>MISSION ACCEPTED</h1>
 
 <div class="card">
 
 DATE ........
-<span class="green">
-04.10.2026
-</span>
+<span class="green">04.10.2026</span>
 
 <br>
 
 TIME ........
-<span class="green">
-09:00 AM
-</span>
+<span class="green">09:00 AM</span>
 
 <br>
 
 LOCATION ....
-<span class="green">
-BENGALURU
-</span>
+<span class="green">BENGALURU</span>
 
 <br>
 
 DURATION ....
-<span class="yellow">
-UNKNOWN
-</span>
+<span class="yellow">UNKNOWN</span>
 
 </div>
 
@@ -609,38 +493,63 @@ Be ready.
 </p>
 
 <p>
-Wear something comfortable.
-Bring your phone.
+Wear something comfortable.<br>
+Bring your phone.<br>
 Bring yourself.
 </p>
 
 <p class="green">
-<b>
-No itinerary.
-No spoilers.
-</b>
+<b>No itinerary. No spoilers.</b>
 </p>
 
-${B(`
-
+<div class="buttons">
 <button onclick="finish()">
 [ CLOSE TRANSMISSION ]
 </button>
-
-`)}
-
-`,"MISSION_ACCEPTED");
-
+</div>
+`);
 }
 
 
-/* FINISH */
+function finish() {
 
-function finish(){
-
-render(`
-
+show(`
 <pre>
-> closing secure channel...
-> saving classified session...
->
+&gt; closing secure channel...
+&gt; saving classified session...
+&gt; done ✓
+</pre>
+
+<h1>SEE YOU SUNDAY.</h1>
+
+<p class="green big">
+Your Sunday has officially been compromised.
+</p>
+
+<div class="card">
+
+SESSION ........
+<span class="green">ACTIVE</span>
+
+<br>
+
+DATE ...........
+04.10.26
+
+<br>
+
+START ..........
+09:00
+
+</div>
+
+<p>
+End of transmission.
+</p>
+`);
+}
+
+</script>
+
+</body>
+</html>
